@@ -95,8 +95,10 @@ const Hero = () => {
                 className="absolute inset-0 opacity-15 animate-pulse"
                 style={{
                     backgroundImage: `
-                    linear-gradient(rgba(251, 191, 36, 0.1) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(251, 191, 36, 0.1) 1px, transparent 1px)
+                    linear-gradient(rgba(255, 255, 255, 0.1)
+ 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255, 255, 255, 0.1)
+ 1px, transparent 1px)
                 `,
                     backgroundSize: `${gridSize * 2}px ${gridSize * 2}px`,
                     transform: `translate(${(mousePosition.x - (typeof window !== 'undefined' ? window.innerWidth : 1920) / 2) * -0.005}px, ${(mousePosition.y - (typeof window !== 'undefined' ? window.innerHeight : 1080) / 2) * -0.005}px)`,
@@ -128,7 +130,7 @@ const Hero = () => {
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
 
             {/* Content Container - Responsive Layout */}
-            <div className="relative z-10 w-full max-w-7xl mx-auto mt-20 px-4 sm:px-6 lg:px-8">
+            <div className="relative z-10 w-full mb-25 max-w-7xl mx-auto mt-20 px-4 sm:px-6 lg:px-8">
                 {/* Mobile/Tablet Layout (Profile on top, content below) */}
                 <div className="flex flex-col lg:hidden items-center text-center space-y-8">
 
@@ -181,7 +183,7 @@ const Hero = () => {
                             </span>
                             <br />
                             <span className="text-white relative">
-                                Sabbir Ansari
+                                Ashwani Kumar
                                 {/* Subtle glow effect */}
                                 <span className="absolute inset-0 bg-gradient-to-r from-yellow-400/20 to-transparent blur-xl -z-10"></span>
                             </span>
@@ -229,33 +231,6 @@ const Hero = () => {
                             </button>
                         </div>
 
-                        {/* Enhanced Social Links */}
-                        <div className="flex items-center justify-center space-x-4 animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
-                            <div className="flex items-center space-x-3">
-                                <a
-                                    href="https://github.com"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="p-3 text-gray-400 hover:text-white hover:bg-gradient-to-r hover:from-yellow-400/20 hover:to-amber-400/20 rounded-full transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 border border-transparent hover:border-yellow-400/30"
-                                >
-                                    <Github size={20} />
-                                </a>
-                                <a
-                                    href="https://linkedin.com"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="p-3 text-gray-400 hover:text-white hover:bg-gradient-to-r hover:from-yellow-400/20 hover:to-amber-400/20 rounded-full transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 border border-transparent hover:border-yellow-400/30"
-                                >
-                                    <Linkedin size={20} />
-                                </a>
-                                <a
-                                    href="mailto:your.email@example.com"
-                                    className="p-3 text-gray-400 hover:text-white hover:bg-gradient-to-r hover:from-yellow-400/20 hover:to-amber-400/20 rounded-full transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 border border-transparent hover:border-yellow-400/30"
-                                >
-                                    <Mail size={20} />
-                                </a>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -318,33 +293,6 @@ const Hero = () => {
                             </button>
                         </div>
 
-                        {/* Enhanced Social Links */}
-                        <div className="flex items-center space-x-4 animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
-                            <div className="flex items-center space-x-3">
-                                <a
-                                    href="https://github.com"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="p-3 text-gray-400 hover:text-white hover:bg-gradient-to-r hover:from-yellow-400/20 hover:to-amber-400/20 rounded-full transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 border border-transparent hover:border-yellow-400/30"
-                                >
-                                    <Github size={20} />
-                                </a>
-                                <a
-                                    href="https://linkedin.com"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="p-3 text-gray-400 hover:text-white hover:bg-gradient-to-r hover:from-yellow-400/20 hover:to-amber-400/20 rounded-full transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 border border-transparent hover:border-yellow-400/30"
-                                >
-                                    <Linkedin size={20} />
-                                </a>
-                                <a
-                                    href="mailto:your.email@example.com"
-                                    className="p-3 text-gray-400 hover:text-white hover:bg-gradient-to-r hover:from-yellow-400/20 hover:to-amber-400/20 rounded-full transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 border border-transparent hover:border-yellow-400/30"
-                                >
-                                    <Mail size={20} />
-                                </a>
-                            </div>
-                        </div>
                     </div>
 
                     {/* Right Column - Enhanced Profile Image */}
@@ -390,8 +338,8 @@ const Hero = () => {
             </div>
 
             {/* Enhanced Scroll Indicator */}
-            <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-                <ArrowDown className="w-6 h-6 text-yellow-400/80 mx-auto filter drop-shadow-lg" />
+            <div className="absolute bottom-8  left-1/2 transform -translate-x-1/2 animate-bounce">
+                <ArrowDown className="w-6 h-6  text-yellow-400/80 mx-auto filter drop-shadow-lg" />
                 <p className="text-sm text-yellow-300/70 mt-2 font-medium">Scroll to explore</p>
             </div>
 
