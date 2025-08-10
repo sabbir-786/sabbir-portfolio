@@ -127,13 +127,142 @@ const Hero = () => {
             {/* Gradient Overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
 
-            {/* Content Container */}
-            <div className="relative z-10 w-full max-w-7xl mx-10 mt-20 px-4 sm:px-6 lg:px-8  ">
-                <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            {/* Content Container - Responsive Layout */}
+            <div className="relative z-10 w-full max-w-7xl mx-auto mt-20 px-4 sm:px-6 lg:px-8">
+                {/* Mobile/Tablet Layout (Profile on top, content below) */}
+                <div className="flex flex-col lg:hidden items-center text-center space-y-8">
 
+                    {/* Profile Image - Mobile First - FIXED */}
+                    <div className="relative flex justify-center animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+                        {/* Enhanced Glowing Background Elements */}
+                        <div className="absolute inset-0 flex items-center justify-center">
+                            {/* Main glow effect with yellow accents */}
+                            <div className="absolute w-64 h-64 sm:w-80 sm:h-80 bg-gradient-to-r from-yellow-500/15 via-amber-500/15 to-orange-500/10 rounded-full blur-3xl animate-pulse"></div>
+
+                            {/* Secondary glow */}
+                            <div className="absolute w-56 h-56 sm:w-72 sm:h-72 bg-gradient-to-br from-yellow-400/10 to-amber-600/10 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+
+                            {/* Enhanced Accent rings */}
+                            <div className="absolute w-72 h-72 sm:w-96 sm:h-96 border border-yellow-400/10 rounded-full animate-spin-slow"></div>
+                            <div className="absolute w-80 h-80 sm:w-[26rem] sm:h-[26rem] border border-amber-400/8 rounded-full animate-spin-slow" style={{ animationDirection: 'reverse', animationDuration: '25s' }}></div>
+                        </div>
+
+                        {/* Enhanced Profile Image Container */}
+                        <div className="relative z-10 group">
+                            <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl transform group-hover:scale-105 transition-all duration-500 ease-out">
+                                <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-amber-400 to-orange-400 rounded-2xl sm:rounded-3xl blur-sm opacity-60 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                <div className="absolute inset-0 bg-gradient-to-r from-yellow-500 via-amber-500 to-orange-500 rounded-2xl sm:rounded-3xl blur-md opacity-30 group-hover:opacity-60 transition-opacity duration-300"></div>
+
+                                {/* Image - FIXED: Now using actual profile image */}
+                                <div className="relative m-1 overflow-hidden rounded-2xl sm:rounded-3xl">
+                                    <img
+                                        src={profile}
+                                        alt="Sabbir Ansari - Professional Profile"
+                                        className="w-64 h-80 sm:w-80 sm:h-96 object-cover filter brightness-110 contrast-105"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-yellow-400/5"></div>
+                                </div>
+                            </div>
+
+                            {/* Enhanced floating accent elements */}
+                            <div className="absolute -top-4 -right-4 w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-r from-yellow-400 to-amber-500 rounded-full animate-bounce shadow-lg shadow-yellow-400/50" style={{ animationDelay: '0.5s' }}></div>
+                            <div className="absolute -bottom-6 -left-6 w-4 h-4 sm:w-6 sm:h-6 bg-gradient-to-r from-amber-400 to-orange-500 rounded-full animate-pulse shadow-lg shadow-amber-400/50"></div>
+                            <div className="absolute top-1/4 -left-6 sm:-left-8 w-3 h-3 sm:w-4 sm:h-4 border-2 border-yellow-400/40 rotate-45 animate-spin-slow"></div>
+                            <div className="absolute top-1/3 -right-8 sm:-right-10 w-2 h-2 sm:w-3 sm:h-3 bg-yellow-400 rounded-full animate-pulse"></div>
+                        </div>
+                    </div>
+
+                    {/* Text Content - Mobile */}
+                    <div className="space-y-6">
+                        {/* Enhanced Main Heading */}
+                        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold animate-fade-in-up leading-tight" style={{ animationDelay: '0.2s' }}>
+                            <span className="bg-gradient-to-r from-yellow-300 via-yellow-400 to-amber-500 bg-clip-text text-3xl sm:text-4xl text-transparent animate-pulse">
+                                I am
+                            </span>
+                            <br />
+                            <span className="text-white relative">
+                                Sabbir Ansari
+                                {/* Subtle glow effect */}
+                                <span className="absolute inset-0 bg-gradient-to-r from-yellow-400/20 to-transparent blur-xl -z-10"></span>
+                            </span>
+                        </h1>
+
+                        {/* Enhanced Subtitle with Yellow Accents */}
+                        <p className="text-base sm:text-lg text-gray-300 animate-fade-in-up leading-relaxed max-w-2xl mx-auto" style={{ animationDelay: '0.3s' }}>
+                            I craft beautiful digital experiences that combine
+                            <span className="text-yellow-400 font-semibold"> innovative design </span>
+                            with
+                            <span className="text-amber-400 font-semibold"> cutting-edge technology</span>
+                        </p>
+
+                        {/* Enhanced Typing Animation */}
+                        <div className="text-sm sm:text-base animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+                            <span className="inline-block text-yellow-200">Specializing in: </span>
+                            <span className="text-white font-mono">
+                                <span className="animate-pulse text-yellow-400">|</span>
+                                <span className="animate-typing"> React • Node.js • UI/UX • Mobile Apps</span>
+                            </span>
+                        </div>
+
+                        {/* Enhanced CTA Buttons */}
+                        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
+                            <button className="group relative px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-yellow-400 to-amber-500 text-black font-bold rounded-full hover:shadow-2xl hover:shadow-yellow-500/30 transform hover:scale-105 transition-all duration-300 overflow-hidden w-full sm:w-auto">
+                                <span className="relative z-10 flex items-center justify-center">
+                                    Hire Me
+                                    <Play className="w-4 h-4 sm:w-5 sm:h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                                </span>
+                                {/* Animated gradient overlay */}
+                                <div className="absolute inset-0 bg-gradient-to-r from-amber-500 to-yellow-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+                                {/* Shimmer effect */}
+                                <div className="absolute inset-0 -skew-x-12 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:translate-x-full transition-transform duration-700"></div>
+                            </button>
+
+                            <button className="group px-6 py-3 sm:px-8 sm:py-4 border-2 border-yellow-400/40 text-white font-semibold rounded-full hover:bg-yellow-400/10 hover:border-yellow-400/60 hover:shadow-lg hover:shadow-yellow-400/20 transform hover:scale-105 transition-all duration-300 relative overflow-hidden w-full sm:w-auto">
+                                <span className="flex items-center justify-center relative z-10">
+                                    Download CV
+                                    <Download className="w-4 h-4 sm:w-5 sm:h-5 ml-2 group-hover:translate-y-1 transition-transform" />
+                                </span>
+
+                                {/* Glow effect on hover */}
+                                <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/5 to-amber-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            </button>
+                        </div>
+
+                        {/* Enhanced Social Links */}
+                        <div className="flex items-center justify-center space-x-4 animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
+                            <div className="flex items-center space-x-3">
+                                <a
+                                    href="https://github.com"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="p-3 text-gray-400 hover:text-white hover:bg-gradient-to-r hover:from-yellow-400/20 hover:to-amber-400/20 rounded-full transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 border border-transparent hover:border-yellow-400/30"
+                                >
+                                    <Github size={20} />
+                                </a>
+                                <a
+                                    href="https://linkedin.com"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="p-3 text-gray-400 hover:text-white hover:bg-gradient-to-r hover:from-yellow-400/20 hover:to-amber-400/20 rounded-full transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 border border-transparent hover:border-yellow-400/30"
+                                >
+                                    <Linkedin size={20} />
+                                </a>
+                                <a
+                                    href="mailto:your.email@example.com"
+                                    className="p-3 text-gray-400 hover:text-white hover:bg-gradient-to-r hover:from-yellow-400/20 hover:to-amber-400/20 rounded-full transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 border border-transparent hover:border-yellow-400/30"
+                                >
+                                    <Mail size={20} />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Desktop Layout (Original two-column) */}
+                <div className="hidden lg:grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
                     {/* Left Column - Text Content */}
                     <div className="text-left lg:pr-8">
-
                         {/* Enhanced Main Heading */}
                         <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 animate-fade-in-up leading-tight">
                             <span className="bg-gradient-to-r from-yellow-300 via-yellow-400 to-amber-500 bg-clip-text text-4xl md:text-5xl text-transparent animate-pulse">
@@ -141,7 +270,7 @@ const Hero = () => {
                             </span>
                             <br />
                             <span className="text-white relative">
-                                Sabbir Ansari
+                                Ashwani Kumar
                                 {/* Subtle glow effect */}
                                 <span className="absolute inset-0 bg-gradient-to-r from-yellow-400/20 to-transparent blur-xl -z-10"></span>
                             </span>
@@ -235,9 +364,7 @@ const Hero = () => {
 
                         {/* Enhanced Profile Image Container */}
                         <div className="relative z-10 group mb-25">
-
                             <div className="relative overflow-hidden rounded-3xl md:rounded-[2rem] transform group-hover:scale-105 transition-all duration-500 ease-out">
-
                                 <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-amber-400 to-orange-400 rounded-3xl md:rounded-[2rem] blur-sm opacity-60 group-hover:opacity-100 transition-opacity duration-300"></div>
                                 <div className="absolute inset-0 bg-gradient-to-r from-yellow-500 via-amber-500 to-orange-500 rounded-3xl md:rounded-[2rem] blur-md opacity-30 group-hover:opacity-60 transition-opacity duration-300"></div>
 
@@ -248,8 +375,6 @@ const Hero = () => {
                                         alt="Sabbir Ansari - Professional Profile"
                                         className="w-80 h-96 md:w-96 md:h-[28rem] object-cover filter brightness-110 contrast-105"
                                     />
-
-
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-yellow-400/5"></div>
                                 </div>
                             </div>
