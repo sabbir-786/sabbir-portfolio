@@ -58,8 +58,8 @@ const About = () => {
         <button
             onClick={() => setActiveTab(id)}
             className={`relative flex items-center px-6 py-3 rounded-xl font-semibold transition-all duration-300 ${isActive
-                    ? 'text-black bg-gradient-to-r from-yellow-400 to-amber-500 shadow-lg shadow-yellow-400/30'
-                    : 'text-gray-400 hover:text-yellow-300 hover:bg-yellow-400/10 border border-gray-600/50 hover:border-yellow-400/30'
+                ? 'text-black bg-gradient-to-r from-yellow-400 to-amber-500 shadow-lg shadow-yellow-400/30'
+                : 'text-gray-400 hover:text-yellow-300 hover:bg-yellow-400/10 border border-gray-600/50 hover:border-yellow-400/30'
                 }`}
         >
             <Icon className="w-4 h-4 mr-2" />
@@ -201,7 +201,7 @@ const About = () => {
                 <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-gradient-to-r from-amber-400/8 to-yellow-500/8 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
             </div>
 
-            <div className="max-w-7xl mx-auto relative z-10">
+            <div className="max-w-7xl mx-auto relative z-10 mt-20 ">
                 {/* Section Header with Animation - Centered */}
                 <div className="flex justify-center mb-12">
                     <div className="inline-flex items-center px-6 py-3 bg-yellow-400/10 border border-yellow-400/30 rounded-full text-yellow-400 text-sm font-medium shadow-lg shadow-yellow-400/10 hover:shadow-yellow-400/20 transition-all duration-300">
@@ -210,7 +210,7 @@ const About = () => {
                     </div>
                 </div>
 
-                <div className="grid xl:grid-cols-3 gap-12 items-start">
+                <div className="grid xl:grid-cols-3 gap-12 items-start ">
                     {/* Profile Card - Left Side */}
                     <div className="flex flex-col items-center text-center space-y-8">
                         {/* Enhanced Profile Image with Multiple Effects */}
