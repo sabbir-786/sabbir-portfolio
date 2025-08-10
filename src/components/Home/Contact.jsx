@@ -56,12 +56,7 @@ const Contact = () => {
                         <MessageCircle className="w-4 h-4 mr-2" />
                         Get In Touch
                     </div>
-                    <h2 className="text-4xl md:text-6xl font-bold mb-6">
-                        <span className="text-white">Let's </span>
-                        <span className="bg-gradient-to-r from-yellow-300 via-yellow-400 to-amber-500 bg-clip-text text-transparent">
-                            Connect
-                        </span>
-                    </h2>
+
                     <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
                         Ready to bring your ideas to life? I'm always open to discussing new opportunities,
                         creative projects, or potential collaborations.
@@ -71,7 +66,7 @@ const Contact = () => {
                 {/* Contact Form */}
                 <div className="max-w-2xl mx-auto">
                     <div className="relative">
-                        <div className="absolute -inset-1 bg-gradient-to-r from-yellow-300 to-amber-400 rounded-3xl blur opacity-20"></div>
+                        <div className="absolute -inset-1 bg-gradient-to-r from-grey to-grey-400 rounded-3xl blur opacity-20"></div>
                         <div className="relative bg-gray-900/50 border border-gray-700 rounded-3xl p-8">
                             {!isSubmitted ? (
                                 <form onSubmit={handleSubmit} className="space-y-6">

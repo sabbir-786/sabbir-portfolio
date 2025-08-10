@@ -166,7 +166,7 @@ const Footer = () => {
 
             {/* Newsletter Form with Yellow Accents */}
             <div className="relative max-w-md mx-auto">
-              <div className="absolute -inset-1 bg-gradient-to-r from-yellow-400 to-amber-500 rounded-full blur opacity-30"></div>
+              <div className="absolute -inset-1 bg-gradient-to-r from-grey-400 to-grey-500 rounded-full blur opacity-30"></div>
               <div className="relative flex bg-gray-900/50 backdrop-blur-sm border border-gray-700/50 rounded-full overflow-hidden hover:border-yellow-400/50 transition-all duration-300">
                 <input
                   type="email"
@@ -316,15 +316,7 @@ const Footer = () => {
               <Zap className="w-4 h-4 text-yellow-500 animate-pulse" style={{ animationDelay: '0.5s' }} />
             </div>
 
-            {/* Back to Top Button with Yellow Theme */}
-            <button
-              onClick={scrollToTop}
-              className="group relative p-3 bg-gradient-to-r from-yellow-400 to-amber-500 rounded-full hover:shadow-2xl hover:shadow-yellow-400/30 transform hover:scale-110 transition-all duration-300"
-              aria-label="Back to top"
-            >
-              <ArrowUp className="w-5 h-5 group-hover:-translate-y-1 transition-transform text-black font-bold" />
-              <div className="absolute inset-0 bg-gradient-to-r from-yellow-500 to-amber-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            </button>
+
           </div>
         </div>
       </div>

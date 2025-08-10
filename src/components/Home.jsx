@@ -120,7 +120,10 @@ const Home = () => {
             >
                 <Contact />
             </section>
+
+
         </div>
+
     )
 }
 
