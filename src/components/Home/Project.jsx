@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ExternalLink, Github, Folder, Lightbulb } from 'lucide-react';
+import { motion, useAnimation, useInView } from 'framer-motion';
 
 const Projects = () => {
     const [isVisible, setIsVisible] = useState(false);
-
-    useEffect(() => {
-        setIsVisible(true);
-    }, []);
+    useEffect(() => setIsVisible(true), []);
 
     const projects = [
         {
@@ -40,115 +38,140 @@ const Projects = () => {
 
     return (
         <div className="py-16 px-4 md:px-8 bg-black relative">
-            {/* Grid Background Pattern */}
+            {/* Grid BG */}
             <div
-                className="absolute inset-0 opacity-20"
+                className="absolute inset-0 opacity-20 pointer-events-none"
                 style={{
                     backgroundImage: `
-                        linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
-                        linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px)
-                    `,
-                    backgroundSize: '50px 50px'
+            linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px)
+          `,
+                    backgroundSize: '44px 44px',
+                    zIndex: 0
                 }}
             />
 
             <div className="max-w-7xl mx-auto relative z-10">
-                {/* Header */}
-                <div className={`text-center mb-16 transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+                <motion.div
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={isVisible ? { y: 0, opacity: 1 } : {}}
+                    transition={{ duration: 0.8, type: "spring" }}
+                    className="text-center mb-16"
+                >
                     <div className="inline-flex items-center px-4 py-2 bg-yellow-400/10 border border-yellow-400/20 rounded-full text-yellow-400 text-sm font-medium mb-8">
                         <Folder className="w-4 h-4 mr-2" />
                         Featured Work
                     </div>
-                 
                     <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
-                        Here are some of my recent projects that showcase my skills and experience in creating
-                        exceptional digital solutions.
+                        Here are some of my recent projects that showcase my skills and experience in creating exceptional digital solutions.
                     </p>
-                </div>
+                </motion.div>
 
-                {/* Projects Grid */}
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {projects.map((project, index) => (
-                        <div
-                            key={project.id}
-                            className={`group relative bg-gray-900/50 backdrop-blur-xl border border-gray-700 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-105 hover:border-yellow-400/50 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
-                            style={{ animationDelay: `${index * 0.2}s` }}
-                        >
-                            {/* Yellow Gradient Border Effect */}
-                            <div className="absolute -inset-0.5 bg-gradient-to-r from-yellow-300 via-yellow-400 to-amber-500 rounded-2xl blur opacity-0 group-hover:opacity-20 transition duration-500"></div>
+                    {projects.map((project, index) => {
+                        // Animation direction: odd left, even right
+                        const dir = index % 2 === 0 ? 120 : -120;
+                        const ref = useRef(null);
+                        const inView = useInView(ref, { once: true, margin: "-80px" });
+                        const controls = useAnimation();
 
-                            {/* Project Image */}
-                            <div className="relative overflow-hidden">
-                                <img
-                                    src={project.image}
-                                    alt={project.title}
-                                    className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                        useEffect(() => {
+                            if (inView) {
+                                controls.start({ x: 0, opacity: 1, scale: 1 });
+                            }
+                        }, [inView, controls]);
 
-                                {/* Yellow Gradient Overlay on Hover */}
-                                <div className="absolute inset-0 bg-gradient-to-t from-yellow-400/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        return (
+                            <motion.div
+                                ref={ref}
+                                key={project.id}
+                                initial={{ x: dir, opacity: 0, scale: 0.95 }}
+                                animate={controls}
+                                transition={{
+                                    duration: 0.76,
+                                    type: "spring",
+                                    stiffness: 320,
+                                    delay: index * 0.14
+                                }}
+                                className={`group relative bg-gradient-to-br from-gray-900/70 to-black/80 backdrop-blur-xl border border-yellow-300/20 rounded-3xl overflow-hidden shadow-2xl hover:border-yellow-400/70 transform`}
+                                style={{ zIndex: 100 - index }}
+                            >
+                                {/* Floating gradients */}
+                                <div className="absolute -inset-0.5 bg-gradient-to-r from-yellow-300 via-yellow-400 to-amber-500 rounded-3xl blur opacity-0 group-hover:opacity-30 transition duration-500 pointer-events-none"></div>
 
-                                {/* Project Icon */}
-                                <div className="absolute top-4 right-4 w-10 h-10 bg-gradient-to-r from-yellow-300 to-amber-400 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
-                                    <Lightbulb className="w-5 h-5 text-black" />
-                                </div>
-                            </div>
+                                {/* Project Image */}
+                                <motion.div
+                                    className="relative overflow-hidden rounded-t-3xl"
+                                    whileHover={{ scale: 1.08, y: -6 }}
+                                    transition={{ type: "spring", stiffness: 400, duration: 0.42 }}
+                                >
+                                    <img
+                                        src={project.image}
+                                        alt={project.title}
+                                        className="w-full h-48 object-cover"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none" />
+                                </motion.div>
 
-                            {/* Project Content */}
-                            <div className="relative p-6">
-                                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-yellow-300 transition-colors duration-300">
-                                    {project.title}
-                                </h3>
-                                <p className="text-gray-300 mb-4 line-clamp-3 leading-relaxed">
-                                    {project.description}
-                                </p>
-
-                                {/* Tech Stack */}
-                                <div className="flex flex-wrap gap-2 mb-6">
-                                    {project.tech.map((tech, techIndex) => (
-                                        <span
-                                            key={tech}
-                                            className="px-3 py-1 bg-yellow-400/10 border border-yellow-400/20 rounded-full text-sm text-yellow-300 hover:bg-yellow-400/20 transition-colors duration-200"
-                                            style={{ animationDelay: `${techIndex * 0.1}s` }}
+                                <div className="relative p-5 md:p-6">
+                                    <motion.h3
+                                        initial={{ y: 18, opacity: 0 }}
+                                        animate={inView ? { y: 0, opacity: 1 } : {}}
+                                        transition={{ delay: index * 0.13, duration: 0.45, type: "spring", stiffness: 380 }}
+                                        className="text-xl font-bold text-yellow-300 drop-shadow mb-3"
+                                    >
+                                        {project.title}
+                                    </motion.h3>
+                                    <motion.p
+                                        initial={{ opacity: 0 }}
+                                        animate={inView ? { opacity: 1 } : {}}
+                                        transition={{ delay: 0.38 + index * 0.18, duration: 0.5 }}
+                                        className="text-gray-300 mb-4 leading-relaxed"
+                                    >
+                                        {project.description}
+                                    </motion.p>
+                                    <div className="flex flex-wrap gap-2 mb-6">
+                                        {project.tech.map((tech, techIndex) => (
+                                            <span
+                                                key={tech}
+                                                className="px-3 py-1 bg-yellow-400/10 border border-yellow-400/20 rounded-full text-xs text-yellow-200 shadow hover:bg-yellow-400/20 transition"
+                                            >
+                                                {tech}
+                                            </span>
+                                        ))}
+                                    </div>
+                                    <div className="flex gap-3">
+                                        <a
+                                            href={project.github}
+                                            className="flex-1 flex items-center justify-center px-4 py-2 bg-gray-800 hover:bg-gray-700 border border-gray-600 hover:border-yellow-400/50 rounded-lg text-gray-300 hover:text-yellow-300 text-sm shadow-md transition"
                                         >
-                                            {tech}
-                                        </span>
-                                    ))}
+                                            <Github className="w-4 h-4 mr-2" /> Code
+                                        </a>
+                                        <a
+                                            href={project.live}
+                                            className="flex-1 flex items-center justify-center px-4 py-2 bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-300 hover:to-amber-400 rounded-lg text-black font-medium text-sm shadow-lg transition"
+                                        >
+                                            <ExternalLink className="w-4 h-4 mr-2" /> Live Demo
+                                        </a>
+                                    </div>
                                 </div>
-
-                                {/* Action Buttons */}
-                                <div className="flex gap-3">
-                                    <a
-                                        href={project.github}
-                                        className="flex-1 flex items-center justify-center px-4 py-2 bg-gray-800 hover:bg-gray-700 border border-gray-600 hover:border-yellow-400/50 rounded-lg transition-all duration-300 text-gray-300 hover:text-yellow-300 text-sm group/btn"
-                                    >
-                                        <Github className="w-4 h-4 mr-2 group-hover/btn:rotate-12 transition-transform duration-300" />
-                                        Code
-                                    </a>
-                                    <a
-                                        href={project.live}
-                                        className="flex-1 flex items-center justify-center px-4 py-2 bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-300 hover:to-amber-400 rounded-lg transition-all duration-300 text-black font-medium text-sm group/btn shadow-lg hover:shadow-yellow-400/25"
-                                    >
-                                        <ExternalLink className="w-4 h-4 mr-2 group-hover/btn:rotate-12 transition-transform duration-300" />
-                                        Live Demo
-                                    </a>
-                                </div>
-
-                                {/* Decorative Yellow Line */}
                                 <div className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-yellow-300 to-amber-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
-                            </div>
-                        </div>
-                    ))}
+                            </motion.div>
+                        );
+                    })}
                 </div>
 
-                {/* Bottom Section */}
-                <div className="text-center mt-16">
+                <motion.div
+                    initial={{ y: 22, opacity: 0 }}
+                    animate={isVisible ? { y: 0, opacity: 1 } : {}}
+                    transition={{ duration: 0.8, type: "spring", delay: 0.1 }}
+                    className="text-center mt-16"
+                >
                     <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-yellow-400/10 to-amber-400/10 border border-yellow-400/20 rounded-full text-yellow-300 text-sm">
                         <span className="mr-2">💡</span>
                         More projects available on my GitHub
                     </div>
-                </div>
+                </motion.div>
             </div>
         </div>
     );
