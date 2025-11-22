@@ -1,184 +1,201 @@
-import React, { useState } from 'react';
-import { Send, MessageCircle, User, Mail, Calendar, CheckCircle } from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { ArrowUpRight, Copy, Check, MapPin, Clock, Send } from "lucide-react";
 
-const Contact = () => {
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
-    });
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [isSubmitted, setIsSubmitted] = useState(false);
+const GetInTouch = () => {
+  const [activeSubject, setActiveSubject] = useState("Web Design");
+  const [isCopied, setIsCopied] = useState(false);
+  const [time, setTime] = useState("");
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({
-            ...prev,
-            [name]: value
-        }));
+  // --- Live Clock Logic ---
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      setTime(now.toLocaleTimeString("en-US", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true,
+        timeZone: "Asia/Kolkata" // Change to your timezone
+      }));
     };
+    updateTime();
+    const interval = setInterval(updateTime, 60000);
+    return () => clearInterval(interval);
+  }, []);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setIsSubmitting(true);
+  // --- Copy Email Logic ---
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText("hello@arthurjackson.com");
+    setIsCopied(true);
+    setTimeout(() => setIsCopied(false), 2000);
+  };
 
-        // Simulate form submission
-        setTimeout(() => {
-            setIsSubmitting(false);
-            setIsSubmitted(true);
-            // Reset form after success message
-            setTimeout(() => {
-                setIsSubmitted(false);
-                setFormData({ name: '', email: '', subject: '', message: '' });
-            }, 3000);
-        }, 2000);
-    };
+  return (
+    <section id="contact" className="relative w-full bg-[#050505] text-white py-24 md:py-32 px-6 overflow-hidden">
 
-    return (
-        <section className="min-h-screen bg-black text-white py-20 relative">
-            {/* Grid Background Pattern */}
-            <div
-                className="absolute inset-0 opacity-20"
-                style={{
-                    backgroundImage: `
-                        linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
-                        linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px)
-                    `,
-                    backgroundSize: '50px 50px'
-                }}
-            />
+      {/* --- BACKGROUND FX --- */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
+           style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}
+      />
+      {/* Bottom Glow */}
+      <div className="absolute bottom-[-20%] left-[-10%] w-[40vw] h-[40vw] bg-indigo-900/10 rounded-full blur-[120px] pointer-events-none" />
 
-            <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                {/* Header Section */}
-                <div className="text-center mb-16">
-                    <div className="inline-flex items-center px-4 py-2 bg-yellow-400/10 border border-yellow-400/20 rounded-full text-yellow-400 text-sm font-medium mb-8">
-                        <MessageCircle className="w-4 h-4 mr-2" />
-                        Get In Touch
-                    </div>
+      <div className="container mx-auto max-w-7xl relative z-10">
 
-                    <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-                        Ready to bring your ideas to life? I'm always open to discussing new opportunities,
-                        creative projects, or potential collaborations.
-                    </p>
-                </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
 
-                {/* Contact Form */}
-                <div className="max-w-2xl mx-auto">
-                    <div className="relative">
-                        <div className="absolute -inset-1 bg-gradient-to-r from-grey to-grey-400 rounded-3xl blur opacity-20"></div>
-                        <div className="relative bg-gray-900/50 border border-gray-700 rounded-3xl p-8">
-                            {!isSubmitted ? (
-                                <form onSubmit={handleSubmit} className="space-y-6">
-                                    <div>
-                                        <h3 className="text-2xl font-bold text-white mb-2">Send Message</h3>
-                                        <p className="text-gray-400 mb-6">Fill out the form below and I'll get back to you within 24 hours.</p>
-                                    </div>
+          {/* --- LEFT COLUMN: INFO --- */}
+          <div className="flex flex-col justify-between">
+            <div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="flex items-center gap-3 mb-6"
+              >
+                <div className="w-8 h-[1px] bg-indigo-500" />
+                <span className="text-sm font-bold tracking-[0.2em] uppercase text-indigo-400">
+                  Contact
+                </span>
+              </motion.div>
 
-                                    <div className="grid md:grid-cols-2 gap-6">
-                                        <div>
-                                            <label className="block text-sm font-medium text-gray-300 mb-2">
-                                                <User className="w-4 h-4 inline mr-2" />
-                                                Your Name
-                                            </label>
-                                            <input
-                                                type="text"
-                                                name="name"
-                                                value={formData.name}
-                                                onChange={handleInputChange}
-                                                required
-                                                className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent text-white placeholder-gray-400 transition-all duration-200"
-                                                placeholder="John Doe"
-                                            />
-                                        </div>
-                                        <div>
-                                            <label className="block text-sm font-medium text-gray-300 mb-2">
-                                                <Mail className="w-4 h-4 inline mr-2" />
-                                                Email Address
-                                            </label>
-                                            <input
-                                                type="email"
-                                                name="email"
-                                                value={formData.email}
-                                                onChange={handleInputChange}
-                                                required
-                                                className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent text-white placeholder-gray-400 transition-all duration-200"
-                                                placeholder="john@example.com"
-                                            />
-                                        </div>
-                                    </div>
+              <motion.h2
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
+                className="text-5xl md:text-7xl font-medium tracking-tighter leading-[0.9] mb-8"
+              >
+                Let's work <br />
+                <span className="text-neutral-600">together.</span>
+              </motion.h2>
 
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-300 mb-2">
-                                            <Calendar className="w-4 h-4 inline mr-2" />
-                                            Subject
-                                        </label>
-                                        <input
-                                            type="text"
-                                            name="subject"
-                                            value={formData.subject}
-                                            onChange={handleInputChange}
-                                            required
-                                            className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent text-white placeholder-gray-400 transition-all duration-200"
-                                            placeholder="Project Discussion"
-                                        />
-                                    </div>
-
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-300 mb-2">
-                                            <MessageCircle className="w-4 h-4 inline mr-2" />
-                                            Message
-                                        </label>
-                                        <textarea
-                                            name="message"
-                                            value={formData.message}
-                                            onChange={handleInputChange}
-                                            required
-                                            rows={5}
-                                            className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent text-white placeholder-gray-400 transition-all duration-200 resize-none"
-                                            placeholder="Tell me about your project or how I can help you..."
-                                        />
-                                    </div>
-
-                                    <button
-                                        type="submit"
-                                        disabled={isSubmitting}
-                                        className="w-full flex items-center justify-center px-8 py-4 bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-300 hover:to-amber-400 text-black font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100 shadow-lg hover:shadow-yellow-400/25"
-                                    >
-                                        {isSubmitting ? (
-                                            <>
-                                                <div className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin mr-2"></div>
-                                                Sending...
-                                            </>
-                                        ) : (
-                                            <>
-                                                <Send className="w-5 h-5 mr-2" />
-                                                Send Message
-                                            </>
-                                        )}
-                                    </button>
-                                </form>
-                            ) : (
-                                <div className="text-center py-12">
-                                    <div className="w-16 h-16 bg-gradient-to-r from-yellow-300 to-amber-400 rounded-full flex items-center justify-center mx-auto mb-4">
-                                        <CheckCircle className="w-8 h-8 text-black" />
-                                    </div>
-                                    <h3 className="text-2xl font-bold text-white mb-2">Message Sent!</h3>
-                                    <p className="text-gray-300 mb-4">
-                                        Thank you for reaching out. I'll get back to you within 24 hours.
-                                    </p>
-                                    <div className="inline-flex items-center px-4 py-2 bg-yellow-400/10 border border-yellow-400/20 rounded-full text-yellow-400 text-sm">
-                                        <span className="mr-2">🚀</span>
-                                        Response time: Usually within 4-6 hours
-                                    </div>
-                                </div>
-                            )}
-                        </div>
-                    </div>
-                </div>
+              <motion.p
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="text-lg text-neutral-400 max-w-md leading-relaxed mb-12"
+              >
+                Have a project in mind? I'm currently available for freelance work and open collaborations.
+              </motion.p>
             </div>
-        </section>
-    );
+
+            {/* Contact Details */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4 }}
+              className="space-y-8"
+            >
+              {/* Email Copy Component */}
+              <button
+                onClick={handleCopyEmail}
+                className="group flex items-center gap-4 text-left hover:opacity-80 transition-opacity"
+              >
+                <div className={`w-12 h-12 rounded-full flex items-center justify-center border transition-all duration-300 ${isCopied ? 'bg-green-500/20 border-green-500/50 text-green-400' : 'bg-white/5 border-white/10 text-white'}`}>
+                  {isCopied ? <Check size={20} /> : <Copy size={20} />}
+                </div>
+                <div>
+                  <span className="block text-xs font-bold uppercase tracking-wider text-neutral-500 mb-1">Email Me</span>
+                  <span className="text-xl md:text-2xl text-white font-medium tracking-tight">hello@arthurjackson.com</span>
+                </div>
+              </button>
+
+              <div className="grid grid-cols-2 gap-8 border-t border-white/10 pt-8">
+                <div className="flex items-start gap-3">
+                  <MapPin size={18} className="text-indigo-400 mt-1" />
+                  <div>
+                     <span className="block text-xs font-bold uppercase tracking-wider text-neutral-500 mb-1">Location</span>
+                     <span className="text-white">New York, USA</span>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <Clock size={18} className="text-indigo-400 mt-1" />
+                  <div>
+                     <span className="block text-xs font-bold uppercase tracking-wider text-neutral-500 mb-1">Local Time</span>
+                     <span className="text-white tabular-nums">{time}</span>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* --- RIGHT COLUMN: FORM --- */}
+          <motion.div
+             initial={{ opacity: 0, x: 20 }}
+             whileInView={{ opacity: 1, x: 0 }}
+             viewport={{ once: true }}
+             transition={{ delay: 0.3 }}
+             className="bg-white/[0.02] border border-white/5 rounded-3xl p-8 md:p-10"
+          >
+            <form onSubmit={(e) => e.preventDefault()} className="space-y-8">
+
+              {/* Subject Selection */}
+              <div className="space-y-4">
+                <label className="text-xs font-bold uppercase tracking-widest text-neutral-500">I'm interested in...</label>
+                <div className="flex flex-wrap gap-3">
+                  {["Web Design", "Development", "Brand Strategy", "Other"].map((subject) => (
+                    <button
+                      key={subject}
+                      type="button"
+                      onClick={() => setActiveSubject(subject)}
+                      className={`px-4 py-2 rounded-full text-sm font-medium border transition-all duration-300 ${
+                        activeSubject === subject
+                          ? "bg-white text-black border-white"
+                          : "bg-transparent text-neutral-400 border-white/10 hover:border-white/30 hover:text-white"
+                      }`}
+                    >
+                      {subject}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="space-y-6">
+                <InputGroup label="Your Name" placeholder="John Doe" type="text" />
+                <InputGroup label="Your Email" placeholder="john@example.com" type="email" />
+                <div className="space-y-2">
+                  <label className="text-xs font-bold uppercase tracking-widest text-neutral-500">Message</label>
+                  <textarea
+                    placeholder="Tell me about your project..."
+                    rows="4"
+                    className="w-full bg-transparent border-b border-white/20 py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-indigo-500 transition-colors resize-none"
+                  />
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                className="group w-full relative overflow-hidden rounded-xl bg-white text-black py-4 font-bold text-lg transition-transform active:scale-95"
+              >
+                <span className="relative z-10 flex items-center justify-center gap-2">
+                  Send Message <Send size={18} className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                </span>
+                {/* Hover Gradient Background */}
+                <div className="absolute inset-0 bg-gradient-to-r from-indigo-400 via-purple-400 to-indigo-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
+              </button>
+            </form>
+          </motion.div>
+
+        </div>
+      </div>
+    </section>
+  );
 };
 
-export default Contact;
+// --- SUB COMPONENTS ---
+
+const InputGroup = ({ label, placeholder, type }) => (
+  <div className="space-y-2">
+    <label className="text-xs font-bold uppercase tracking-widest text-neutral-500">{label}</label>
+    <input
+      type={type}
+      placeholder={placeholder}
+      className="w-full bg-transparent border-b border-white/20 py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-indigo-500 transition-colors"
+    />
+  </div>
+);
+
+export default GetInTouch;

@@ -94,14 +94,6 @@ const Home = () => {
                 <About />
             </section>
 
-            {/* Skills Section - Black with yellow accent */}
-            <section
-                id="skills"
-                className={`{getBaseClasses('skills')`}
-
-            >
-                <Skills />
-            </section>
 
             {/* Projects Section - Dark with side gradients */}
             <section
