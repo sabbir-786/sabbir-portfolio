@@ -2,6 +2,9 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUp, Github, Twitter, Linkedin, Instagram } from 'lucide-react';
 
+// --- Import Logo ---
+import Logo from "../assets/logo02.jpg";
+
 const Footer = () => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -23,11 +26,17 @@ const Footer = () => {
 
           {/* Logo / Slogan */}
           <div className="space-y-4">
-            <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-black font-bold text-lg">
-              AJ
+            {/* Logo Container */}
+            <div className="w-12 h-12 overflow-hidden rounded-full bg-neutral-900 border border-white/10 flex items-center justify-center">
+               <img
+                 src={Logo}
+                 alt="Sabbir Ansari Logo"
+                 className="w-full h-full object-cover"
+               />
             </div>
+
             <p className="text-neutral-400 max-w-xs text-sm leading-relaxed">
-              Crafting digital experiences with code and passion. Based in New York, working globally.
+              Crafting digital experiences with code and passion. Based in Bokaro Steel City, working globally.
             </p>
           </div>
 

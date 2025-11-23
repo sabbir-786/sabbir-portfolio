@@ -36,7 +36,7 @@ const projects = [
   },
 ];
 
-const Work = () => {
+const Project = () => {
   return (
     <section id="work" className="relative w-full bg-[#050505] text-white py-24 md:py-32 px-6">
 
@@ -164,4 +164,4 @@ const ProjectCard = ({ project, index }) => {
   );
 };
 
-export default Work;
+export default Project;

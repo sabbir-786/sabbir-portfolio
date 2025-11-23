@@ -1,6 +1,18 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Code2, Palette, Zap, Globe, Layout, Database, Cpu, Layers } from "lucide-react";
+import { Code2, Palette, Zap } from "lucide-react";
+
+// --- IMPORT ICONS ---
+import Html from "../../assets/icons/HTML5.png";
+import Css from "../../assets/icons/CSS3.png";
+import Js from "../../assets/icons/JavaScript.png";
+import ReactIcon from "../../assets/icons/React.png";
+import NodeIcon from "../../assets/icons/Node.js.png";
+import TailwindIcon from "../../assets/icons/tailwind.png";
+import FigmaIcon from "../../assets/icons/figma.png";
+import GitIcon from "../../assets/icons/Git.png";
+import MongoIcon from "../../assets/icons/MongoDB.png";
+import SqlIcon from "../../assets/icons/MySQL.png";
 
 // --- DATA ---
 const services = [
@@ -22,14 +34,16 @@ const services = [
 ];
 
 const techStack = [
-  { name: "React", icon: <Globe size={20} /> },
-  { name: "Next.js", icon: <Layout size={20} /> },
-  { name: "TypeScript", icon: <Code2 size={20} /> },
-  { name: "Node.js", icon: <Database size={20} /> },
-  { name: "Tailwind", icon: <Palette size={20} /> },
-  { name: "Framer", icon: <Layers size={20} /> },
-  { name: "AWS", icon: <Cpu size={20} /> },
-  { name: "GraphQL", icon: <Zap size={20} /> },
+  { name: "HTML5", icon: Html },
+  { name: "CSS3", icon: Css },
+  { name: "JavaScript", icon: Js },
+  { name: "React", icon: ReactIcon },
+  { name: "Node.js", icon: NodeIcon },
+  { name: "Tailwind", icon: TailwindIcon },
+  { name: "MongoDB", icon: MongoIcon },
+  { name: "SQL", icon: SqlIcon },
+  { name: "Git", icon: GitIcon },
+  { name: "Figma", icon: FigmaIcon },
 ];
 
 const About = () => {
@@ -116,7 +130,8 @@ const About = () => {
               Current Stack
             </motion.h3>
 
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            {/* Grid updated to 5 cols on MD screens to fit 10 items perfectly */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
               {techStack.map((tech, index) => (
                 <StackItem key={tech.name} tech={tech} index={index} />
               ))}
@@ -147,9 +162,15 @@ const StackItem = ({ tech, index }) => (
     whileHover={{ y: -5, backgroundColor: "rgba(255,255,255,0.05)" }}
     className="flex flex-col items-center justify-center p-4 rounded-xl border border-white/5 bg-white/[0.02] cursor-default group transition-colors"
   >
-    <div className="text-neutral-500 group-hover:text-indigo-400 transition-colors mb-3">
-      {tech.icon}
+    {/* IMAGE ICON */}
+    <div className="w-8 h-8 mb-3 relative flex items-center justify-center">
+      <img
+        src={tech.icon}
+        alt={`${tech.name} logo`}
+        className="w-full h-full object-contain filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300"
+      />
     </div>
+
     <span className="text-sm font-medium text-neutral-300 group-hover:text-white transition-colors">
       {tech.name}
     </span>

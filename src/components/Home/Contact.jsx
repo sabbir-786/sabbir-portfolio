@@ -99,7 +99,7 @@ const GetInTouch = () => {
                 </div>
                 <div>
                   <span className="block text-xs font-bold uppercase tracking-wider text-neutral-500 mb-1">Email Me</span>
-                  <span className="text-xl md:text-2xl text-white font-medium tracking-tight">hello@arthurjackson.com</span>
+                  <span className="text-xl md:text-2xl text-white font-medium tracking-tight">sabbir.ansari3574@gmail.com</span>
                 </div>
               </button>
 
@@ -108,7 +108,7 @@ const GetInTouch = () => {
                   <MapPin size={18} className="text-indigo-400 mt-1" />
                   <div>
                      <span className="block text-xs font-bold uppercase tracking-wider text-neutral-500 mb-1">Location</span>
-                     <span className="text-white">New York, USA</span>
+                     <span className="text-white">Bokaro, Jharkhand, India</span>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">

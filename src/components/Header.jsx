@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ArrowUpRight, Code2 } from "lucide-react";
+import { Menu, X, ArrowUpRight } from "lucide-react"; // Removed Code2
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+
+// --- Import Logo ---
+// Note: Adjust the path below ("../image/logo.png") based on your folder structure.
+// If your component is in 'src/components', this path assumes the image is in 'src/image'.
+import Logo from "../assets/logo02.jpg";
 
 // --- Utility ---
 function cn(...inputs) {
@@ -58,8 +63,15 @@ const Header = () => {
           <div className="flex items-center gap-3">
             <a href="#home" className="group relative flex items-center gap-2">
               <div className="relative flex items-center justify-center w-10 h-10 overflow-hidden rounded-full bg-neutral-900 border border-white/10 group-hover:border-indigo-500/50 transition-colors">
-                <Code2 className="w-5 h-5 text-indigo-400 group-hover:text-indigo-300 transition-colors" />
-                {/* Logo Glow */}
+
+                {/* IMAGE LOGO */}
+                <img
+                  src={Logo}
+                  alt="Sabbir Ansari Logo"
+                  className="w-full h-full object-cover"
+                />
+
+                {/* Logo Glow Overlay */}
                 <div className="absolute inset-0 bg-indigo-500/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </div>
 
@@ -71,7 +83,7 @@ const Header = () => {
                     exit={{ opacity: 0, width: 0 }}
                     className="font-bold text-lg text-white tracking-tight overflow-hidden whitespace-nowrap hidden sm:block"
                   >
-                    Axonn
+                    Sabbir Ansari
                   </motion.span>
                 )}
               </AnimatePresence>
