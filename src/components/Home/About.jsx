@@ -9,7 +9,7 @@ import Js from "../../assets/icons/JavaScript.png";
 import ReactIcon from "../../assets/icons/React.png";
 import NodeIcon from "../../assets/icons/Node.js.png";
 import TailwindIcon from "../../assets/icons/Tailwind.png";
-import FigmaIcon from "../../assets/icons/figma.png";
+import FigmaIcon from "../../assets/icons/Figma.png";
 import GitIcon from "../../assets/icons/Git.png";
 import MongoIcon from "../../assets/icons/MongoDB.png";
 import SqlIcon from "../../assets/icons/MySQL.png";
