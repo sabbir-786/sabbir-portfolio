@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, useMotionValue, useSpring, useInView } from 'framer-motion';
-import { Facebook, Twitter, Instagram, MoveRight } from 'lucide-react';
+import { Facebook, Twitter, Instagram, MoveRight, Linkedin, Github } from 'lucide-react';
+import sabbir from "../../assets/Sabbir.jpg";
 
 const Hero = () => {
   // --- Animation Variants ---
@@ -61,7 +62,7 @@ const Hero = () => {
           <motion.div variants={itemFadeUp} className="group cursor-default">
             <SectionLabel>Biography</SectionLabel>
             <p className="text-neutral-400 leading-relaxed max-w-md mx-auto lg:mx-0 text-base md:text-lg transition-colors group-hover:text-neutral-200">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.
+              I’m a passionate developer focused on building clean, user-friendly, and efficient digital experiences. I enjoy turning ideas into real products using modern tools and creative problem-solving. Every project I work on is driven by precision, innovation, and continuous learning.
               <span className="block mt-4 text-white font-medium">
                 Passionate about creating digital experiences that matter.
               </span>
@@ -75,18 +76,27 @@ const Hero = () => {
                <span className="w-1 h-1 bg-neutral-600 rounded-full self-center" />
                <span>UI & UX Design</span>
                <span className="w-1 h-1 bg-neutral-600 rounded-full self-center" />
-               <span>Marketing</span>
-               <span className="w-1 h-1 bg-neutral-600 rounded-full self-center" />
-               <span>SEO</span>
+               <span>App Developer</span>
+
             </div>
           </motion.div>
 
           <motion.div variants={itemFadeUp}>
             <SectionLabel>Connect</SectionLabel>
             <div className="flex gap-4 justify-center lg:justify-start">
-              <SocialIcon icon={<Facebook size={18} />} />
-              <SocialIcon icon={<Twitter size={18} />} />
-              <SocialIcon icon={<Instagram size={18} />} />
+              {/* UPDATED: Added href props here */}
+              <SocialIcon
+                href="https://github.com/sabbir-786"
+                icon={<Github size={18} />}
+              />
+              <SocialIcon
+                href="www.linkedin.com/in/sabbir-ansari-56260929a"
+                icon={<Linkedin size={18} />}
+              />
+              <SocialIcon
+                href="https://www.instagram.com/sabbir_ansari_007"
+                icon={<Instagram size={18} />}
+              />
             </div>
           </motion.div>
 
@@ -117,7 +127,7 @@ const Hero = () => {
 
              <div className="w-full h-full rounded-full overflow-hidden relative bg-neutral-900 border border-white/10">
                 <img
-                  src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=1000&auto=format&fit=crop"
+                  src= {sabbir}
                   alt="SABBIR ANSARI"
                   className="w-full h-full object-cover filter brightness-[0.85] contrast-[1.1] grayscale-[0.2] transition-all duration-700 group-hover:scale-110 group-hover:grayscale-0 group-hover:brightness-100"
                 />
@@ -130,9 +140,9 @@ const Hero = () => {
         {/* --- RIGHT COLUMN: STATS --- */}
         <div className="order-3 lg:order-3 flex flex-col space-y-16 text-center lg:text-right">
           {/* Pass raw strings, NumberTicker handles the parsing */}
-          <StatItem label="Projects Done" value="432" variants={itemFadeUp} delay={0} />
-          <StatItem label="Experience" value="13+" variants={itemFadeUp} delay={0.1} />
-          <StatItem label="Clients" value="900" variants={itemFadeUp} delay={0.2} />
+          <StatItem label="Projects Done" value="10" variants={itemFadeUp} delay={0} />
+          <StatItem label="Experience" value="1+" variants={itemFadeUp} delay={0.1} />
+          <StatItem label="Clients" value="12" variants={itemFadeUp} delay={0.2} />
         </div>
 
       </motion.div>
@@ -256,10 +266,12 @@ const StatItem = ({ label, value, variants }) => (
   </motion.div>
 );
 
-// 5. Social Icon
-const SocialIcon = ({ icon }) => (
+// 5. Social Icon - UPDATED to accept `href`
+const SocialIcon = ({ icon, href }) => (
   <a
-    href="#"
+    href={href || "#"} // Use href if provided, else default to #
+    target="_blank"     // Open in new tab
+    rel="noopener noreferrer" // Security best practice
     className="w-12 h-12 rounded-full border border-white/10 bg-transparent flex items-center justify-center text-white hover:bg-white hover:text-black hover:border-white transition-all duration-500 group"
   >
     <div className="transition-transform duration-300 group-hover:scale-110">

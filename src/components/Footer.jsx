@@ -60,10 +60,9 @@ const Footer = () => {
             {/* Socials */}
             <div className="flex flex-col gap-3">
               <h4 className="text-xs font-bold uppercase tracking-widest text-neutral-600 mb-1">Socials</h4>
-              <SocialLink href="#" label="Twitter" icon={<Twitter size={14} />} />
-              <SocialLink href="#" label="LinkedIn" icon={<Linkedin size={14} />} />
-              <SocialLink href="#" label="GitHub" icon={<Github size={14} />} />
-              <SocialLink href="#" label="Instagram" icon={<Instagram size={14} />} />
+              <SocialLink href="www.linkedin.com/in/sabbir-ansari-56260929a" label="LinkedIn" icon={<Linkedin size={14} />} />
+              <SocialLink href="https://github.com/sabbir-786" label="GitHub" icon={<Github size={14} />} />
+              <SocialLink href="https://www.instagram.com/sabbir_ansari_007" label="Instagram" icon={<Instagram size={14} />} />
             </div>
           </div>
 

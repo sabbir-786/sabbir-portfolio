@@ -1,38 +1,43 @@
 import React, { useRef } from "react";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import { ArrowUpRight, MoveRight } from "lucide-react";
+import { motion, useScroll } from "framer-motion";
+import { ArrowUpRight, MoveRight, Github, ArrowRightCircle } from "lucide-react"; // Added Github Icon
+
+// --- ASSETS ---
+import expense from "../../assets/Expense.png";
+import shopkart from "../../assets/Shopkart.png";
+import company from "../../assets/Company.png";
 
 // --- DATA ---
 const projects = [
   {
     id: 1,
-    title: "Nebula Finance",
-    category: "Fintech / UI Design",
-    description: "A next-generation banking dashboard focusing on data visualization and user trust. Built with real-time websocket integration.",
-    tags: ["React", "D3.js", "Tailwind"],
-    // Dark, moody abstract tech image
-    image: "https://images.unsplash.com/photo-1639322537228-f710d846310a?q=80&w=1600&auto=format&fit=crop",
-    link: "#"
+    title: "Expense Tracker App",
+    category: "React Native Expo App",
+    description: "A cross-platform mobile app to track income and expenses with real-time syncing. Features Firebase Auth for sessions, Realtime Database for data storage, and Cloudinary for receipt uploads.",
+    tags: ["React Native", "TypeScript", "Firebase"],
+    image: expense,
+    // PASTE YOUR GITHUB LINK BELOW
+    link: "https://github.com/sabbir-786/expense-tracker-app.git"
   },
   {
     id: 2,
-    title: "Aero Space",
-    category: "Ecommerce / 3D",
-    description: "An immersive e-commerce experience for high-end furniture, utilizing WebGL to render products in the user's environment.",
-    tags: ["Next.js", "Three.js", "Shopify"],
-    // Sleek furniture/interior image
-    image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=1600&auto=format&fit=crop",
-    link: "#"
+    title: "Shopkart",
+    category: "eCommerce App",
+    description: "A full-stack e-commerce platform with secure user/admin login and order management. Utilizes JWT for auth, Redux Toolkit for global state, and Shadcn UI for a modern interface.",
+    tags: ["MERN", "Redux Toolkit", "Shadcn UI"],
+    image: shopkart,
+    // PASTE YOUR GITHUB LINK BELOW
+    link: "https://github.com/yourusername/shopkart"
   },
   {
     id: 3,
-    title: "Lumina Health",
-    category: "App / UX Strategy",
-    description: "A holistic health tracking application that uses AI to predict wellness trends based on user habits.",
-    tags: ["React Native", "Python", "OpenAI"],
-    // Clean, minimal abstract shape
-    image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1600&auto=format&fit=crop",
-    link: "#"
+    title: "Company Management Portal",
+    category: "Admin Dashboard",
+    description: "A responsive admin dashboard built with React and PHP. Features secure REST APIs for managing employees, services, and content, with strictly implemented role-based access control.",
+    tags: ["React", "PHP", "REST API"],
+    image: company,
+    // PASTE YOUR GITHUB LINK BELOW
+    link: "https://www.techdigimind.com/"
   },
 ];
 
@@ -63,11 +68,13 @@ const Project = () => {
           </div>
 
           <motion.a
-            href="#"
+            href="https://github.com/sabbir-786" // Link to your main GitHub profile
+            target="_blank"
+            rel="noopener noreferrer"
             whileHover={{ x: 5 }}
             className="hidden md:flex items-center gap-2 text-sm font-bold uppercase tracking-widest border-b border-white/20 pb-1 hover:border-white hover:text-white text-neutral-400 transition-all"
           >
-            View All Works <MoveRight className="w-4 h-4" />
+            View Github Profile <MoveRight className="w-4 h-4" />
           </motion.a>
         </div>
 
@@ -76,13 +83,6 @@ const Project = () => {
           {projects.map((project, index) => (
             <ProjectCard key={project.id} project={project} index={index} />
           ))}
-        </div>
-
-        {/* Mobile "View All" Button */}
-        <div className="mt-16 md:hidden flex justify-center">
-           <a href="#" className="inline-flex items-center gap-2 px-6 py-3 bg-white/5 border border-white/10 rounded-full text-sm font-bold uppercase tracking-widest">
-              View All Works
-           </a>
         </div>
 
       </div>
@@ -95,14 +95,10 @@ const Project = () => {
 const ProjectCard = ({ project, index }) => {
   const ref = useRef(null);
 
-  // Parallax Logic
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
   });
-
-  // Map scroll progress to image movement (parallax)
-  const y = useTransform(scrollYProgress, [0, 1], ["-20%", "20%"]);
 
   return (
     <motion.div
@@ -113,22 +109,19 @@ const ProjectCard = ({ project, index }) => {
       transition={{ duration: 0.8, ease: [0.25, 1, 0.5, 1] }}
       className="group relative grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
     >
-      {/* --- IMAGE SECTION (Takes up 7 cols) --- */}
-      <div className={`lg:col-span-7 relative overflow-hidden rounded-2xl h-[300px] md:h-[500px] border border-white/10 ${index % 2 === 1 ? 'lg:order-2' : 'lg:order-1'}`}>
-
-        {/* Overlay that fades on hover */}
+      {/* --- IMAGE SECTION --- */}
+      <div className={`lg:col-span-7 relative overflow-hidden rounded-2xl h-auto border border-white/10 ${index % 2 === 1 ? 'lg:order-2' : 'lg:order-1'}`}>
         <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent z-10 transition-colors duration-500" />
-
-        <motion.div style={{ y }} className="w-full h-[120%] -top-[10%] relative">
+        <div className="w-full relative">
           <img
             src={project.image}
             alt={project.title}
-            className="w-full h-full object-cover filter grayscale-[0.2] group-hover:grayscale-0 transition-all duration-700 transform group-hover:scale-105"
+            className="w-full h-auto object-contain block filter grayscale-[0.2] group-hover:grayscale-0 transition-all duration-700"
           />
-        </motion.div>
+        </div>
       </div>
 
-      {/* --- INFO SECTION (Takes up 5 cols) --- */}
+      {/* --- INFO SECTION --- */}
       <div className={`lg:col-span-5 flex flex-col justify-center ${index % 2 === 1 ? 'lg:order-1 lg:text-right items-end' : 'lg:order-2 lg:text-left items-start'}`}>
 
         {/* Tags */}
@@ -143,7 +136,6 @@ const ProjectCard = ({ project, index }) => {
         {/* Title */}
         <h3 className="text-3xl md:text-5xl font-semibold text-white mb-4 flex items-center gap-4 group-hover:text-indigo-300 transition-colors duration-300">
           {project.title}
-          <ArrowUpRight className="w-6 h-6 md:w-8 md:h-8 opacity-0 -translate-y-2 translate-x-2 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all duration-500" />
         </h3>
 
         {/* Desc */}
@@ -151,12 +143,17 @@ const ProjectCard = ({ project, index }) => {
           {project.description}
         </p>
 
-        {/* Button */}
+        {/* Button - Updated to GitHub Style */}
         <a
           href={project.link}
-          className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-white hover:text-indigo-400 transition-colors"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-3 text-sm font-bold uppercase tracking-widest text-white hover:text-indigo-400 transition-colors"
         >
-          <span className="border-b border-white/30 pb-1 group-hover:border-indigo-400 transition-colors">See Case Study</span>
+          <ArrowRightCircle className="w-5 h-5" />
+          <span className="border-b border-white/30 pb-1 group-hover:border-indigo-400 transition-colors">
+            View
+          </span>
         </a>
 
       </div>
